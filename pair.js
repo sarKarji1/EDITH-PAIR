@@ -1,4 +1,4 @@
-PastebinAPI = require('pastebin-js'),
+const PastebinAPI = require('pastebin-js'),
 pastebin = new PastebinAPI('EMWTMkQAVfJa9kM-MRUrxd5Oku1U7pgL')
 const {makeid} = require('./id');
 const express = require('express');
@@ -6,12 +6,12 @@ const fs = require('fs');
 let router = express.Router()
 const pino = require("pino");
 const {
-    default: Maher_Zubair,
+    default: makeWASocket,
     useMultiFileAuthState,
     delay,
     makeCacheableSignalKeyStore,
     Browsers
-} = require("maher-zubair-baileys");
+} = require("@whiskeysockets/baileys");
 
 function removeFile(FilePath){
     if(!fs.existsSync(FilePath)) return false;
@@ -26,14 +26,14 @@ router.get('/', async (req, res) => {
             saveCreds
         } = await useMultiFileAuthState('./temp/'+id)
      try {
-            let Pair_Code_By_Maher_Zubair = Maher_Zubair({
+            let Pair_Code_By_Maher_Zubair = makeWASocket({
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({level: "fatal"}).child({level: "fatal"})),
                 },
                 printQRInTerminal: false,
                 logger: pino({level: "fatal"}).child({level: "fatal"}),
-                browser: ["Chrome (Linux)", "", ""]
+                browser: Browsers.ubuntu("Chrome")
              });
              if(!Pair_Code_By_Maher_Zubair.authState.creds.registered) {
                 await delay(1500);
@@ -59,7 +59,7 @@ router.get('/', async (req, res) => {
                let SIGMA_MD_TEXT = `
 *𝙈𝘼𝘾 𝙈𝘿 𝘾𝙊𝙉𝙉𝙀𝘾𝙏𝙀𝘾𝙃*
 *𝙈𝘼𝘾 𝙏𝙀𝘾𝙃*
-*𝙇𝙀𝙂𝙄𝙏 𝘽𝙊𝙏*
+*𝙇𝙀𝙂𝙄𝙏 �𝘽𝙊𝙏*
 ____________________________________
 ╔════◇
 ║『 𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍𝙎』
